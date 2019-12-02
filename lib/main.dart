@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'placeholder.dart';
+import 'apropos.dart';
 
 void main() => runApp(MyApp());
 
@@ -49,7 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
   final List<Widget> _children = [
     PlaceholderWidget(Colors.white),
     PlaceholderWidget(Colors.deepOrange),
-    PlaceholderWidget(Colors.green)
+    aProposPage()
   ];
 
   void _incrementCounter() {
