@@ -30,26 +30,48 @@ class Note extends StatefulWidget {
 class NoteState extends State<Note> {
 
   String _titleNote = "Pas de note";
+  String _contentNote = "";
 
   @override
   void initState() {
-    getTitrePreferences().then(updateTitle);
+    getTitlePreferences().then(updateTitle);
+    getContentPreferences().then(updateContent);
     super.initState();
   }
 
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Center(
+        body: Container(
+            padding: const EdgeInsets.all(30.0),
             child: ListView(
               children: <Widget>[
                 Padding(
-                  padding: const EdgeInsets.only(left: 10,top: 50),
+                  padding: const EdgeInsets.only(top: 50),
+                ),
+                Center(
+                    child: Text(
+                      'Titre',
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+                    )
+                ),
+                Center(
                     child: Text(_titleNote)
                 ),
-
-               Padding(
-                padding: const EdgeInsets.only(left: 40,right: 40),
-                child : FlatButton(
+                Padding(
+                  padding: const EdgeInsets.only(top: 15),
+                ),
+                Center(
+                    child: Text(
+                      'Contenu',
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+                    )
+                ),
+                Center(
+                    child: Text(_contentNote)
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 40,right: 40, top: 50),
+                  child : FlatButton(
                       color: Colors.blue,
                       textColor: Colors.white,
                       disabledColor: Colors.grey,
@@ -77,8 +99,13 @@ class NoteState extends State<Note> {
     setState(() {
       if(title != null)
         this._titleNote = title;
-      else
-        this._titleNote = "Pas de note";
+    });
+  }
+
+  void updateContent(String content) {
+    setState(() {
+      if(content != null)
+        this._contentNote = content;
     });
   }
 }

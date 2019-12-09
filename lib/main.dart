@@ -105,7 +105,18 @@ Future<bool> saveTitlePreferences(String title) async {
   return prefs.setString("titre", title);
 }
 
-Future<String> getTitrePreferences() async{
+Future<String> getTitlePreferences() async{
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   return prefs.getString("titre");
+}
+
+Future<bool> saveContentPreferences(String content) async {
+  final SharedPreferences prefs = await SharedPreferences
+      .getInstance();
+  return prefs.setString("contenu", content);
+}
+
+Future<String> getContentPreferences() async{
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  return prefs.getString("contenu");
 }

@@ -9,6 +9,7 @@ class CreationNote extends StatelessWidget {
     return MaterialApp(
       title: appTitle,
       home: Scaffold(
+        resizeToAvoidBottomPadding: false,
         appBar: AppBar(
           title: Text(appTitle),
         ),
@@ -34,11 +35,14 @@ class NoteFormState extends State<NoteForm> {
   // not a GlobalKey<MyCustomFormState>.
   final _formKey = GlobalKey<FormState>();
   var _controllerTitle = new TextEditingController();
+  var _controllerContent = new TextEditingController();
   String _titleNote = "";
+  String _contentNote = "";
 
   @override
   void initState() {
-    getTitrePreferences().then(updateTitle);
+    getTitlePreferences().then(updateTitle);
+    getContentPreferences().then(updateContent);
     super.initState();
   }
 
@@ -64,12 +68,18 @@ class NoteFormState extends State<NoteForm> {
               }
           ),
           TextFormField(
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Veuillez entrer un message';
+              maxLines: 5,
+              controller: _controllerContent,
+              decoration: new InputDecoration(
+                  hintText: _contentNote,
+                  labelText: 'Contenu'
+              ),
+              validator: (value) {
+                if (value.isEmpty) {
+                  return 'Veuillez entrer un message';
+                }
+                return null;
               }
-              return null;
-            },
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 50.0),
@@ -79,6 +89,7 @@ class NoteFormState extends State<NoteForm> {
                 // otherwise.
                 if (_formKey.currentState.validate()) {
                   saveTitle();
+                  saveContent();
                   // If the form is valid, display a Snackbar.
                   Scaffold.of(context)
                       .showSnackBar(SnackBar(content: Text('Processing Data')));
@@ -107,6 +118,18 @@ class NoteFormState extends State<NoteForm> {
   void saveTitle(){
     String title = _controllerTitle.text;
     saveTitlePreferences(title);
+  }
+
+  void updateContent(String content) {
+    setState(() {
+      if(content != null)
+        this._contentNote = content;
+    });
+  }
+
+  void saveContent(){
+    String content = _controllerContent.text;
+    saveContentPreferences(content);
   }
 }
 
