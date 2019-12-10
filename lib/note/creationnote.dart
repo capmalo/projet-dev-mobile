@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'main.dart';
-import 'note.dart';
+import '../main.dart';
 
 class CreationNote extends StatelessWidget {
   Widget build(BuildContext context) {

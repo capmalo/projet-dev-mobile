@@ -1,7 +1,5 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'main.dart';
+import '../main.dart';
 import 'creationnote.dart';
 
 class NotePage extends StatelessWidget {

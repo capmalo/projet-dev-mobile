@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'placeholder.dart';
 import 'apropos.dart';
-import 'note.dart';
+import 'note/note.dart';
+import 'users/listusers.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() => runApp(MyApp());
@@ -51,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int _currentIndex = 0;
   final List<Widget> _children = [
     Note(),
-    PlaceholderWidget(Colors.deepOrange),
+    Users(),
     aProposPage()
   ];
 
