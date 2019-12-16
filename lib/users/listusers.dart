@@ -32,7 +32,17 @@ class _ListUsersScreenState extends State {
       setState(() {
         var jsonData = json.decode(response.body);
         for (var user in jsonData['results']) {
-          User data = new User(user['login']['uuid'], user['name']['first'], user['email']);
+          User data = new User(
+              user['login']['uuid'],
+              user['name']['first'],
+              user['name']['last'],
+              user['email'],
+              user['login']['username'],
+              user['name']['title'],
+              user['dob']['age'],
+              user['phone'],
+              user['picture']['large'],
+          );
           users.add(data);
         }
         /*String list = json.decode(response.body);
@@ -63,7 +73,7 @@ class _ListUsersScreenState extends State {
         child: new FutureBuilder(
           //future: userDetails(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
-            if (users == null) {
+            if (users.length == 0) {
               return new Center(
                 child: new CircularProgressIndicator(),
               );
@@ -80,14 +90,14 @@ class _ListUsersScreenState extends State {
                       ),*/
                     ),*/
                     title: new Text(
-                      users[index].name +
+                      users[index].fname +
                           " " +
-                          users[index].name,
+                          users[index].lname,
                       style: new TextStyle(
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    //subtitle: new Text(snapshot.data[index].email),
+                    subtitle: new Text(users[index].email),
                    /* trailing: new SizedBox(
                       height: 20.0,
                       child: new Image.asset(menOrWomen(snapshot.data[index].gender)),
