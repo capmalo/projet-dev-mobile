@@ -5,6 +5,8 @@ import 'note/note.dart';
 import 'users/listusers.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+var titleText;
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -59,6 +61,14 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    if(_currentIndex == 0){
+      titleText = Text("Save note");}
+    else if(_currentIndex == 1){
+      titleText = Text("List Users");
+    }
+    else if (_currentIndex == 2){
+      titleText = Text("A Propos");
+    }
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -69,7 +79,8 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text("Projet de dev mobile"),
+        //title: Text("Projet de dev mobile"),
+        title: titleText,
       ),
       bottomNavigationBar: BottomNavigationBar(
         onTap: onTabTapped, // new

@@ -1,5 +1,6 @@
 import 'dart:collection';
 import 'dart:convert';
+
 import 'API.dart';
 import 'user.dart';
 import 'package:flutter/material.dart';
@@ -64,11 +65,11 @@ class _ListUsersScreenState extends State {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text("Random Users"),
+    return Scaffold(
+      /*appBar: AppBar(
+        title: Text("Users list"),
         centerTitle: false,
-      ),
+      ),*/
       body: new Container(
         child: new FutureBuilder(
           //future: userDetails(),
