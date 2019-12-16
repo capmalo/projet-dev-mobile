@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'app_properties_bloc.dart';
 import 'apropos.dart';
 import 'note/note.dart';
 import 'users/listusers.dart';
@@ -66,25 +65,6 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: true,
-        leading: StreamBuilder<Object>(
-            stream: appBloc.backStream,
-            initialData: false,
-            builder: (context, snapshot){
-              if(snapshot.data){return IconButton(icon:Icon(Icons.arrow_back),
-                  onPressed:(){appBloc.updateBack(false);appBloc.updateTitle('List users');Navigator.pop(appBloc.getContext()); });}
-              else{ return Text("");}
-            }
-        ),
-        title: StreamBuilder<Object>(
-            stream: appBloc.titleStream,
-            initialData: "Save Note",
-            builder: (context, snapshot) {
-              return Text(snapshot.data);
-            }
-        ),
-      ),
       bottomNavigationBar: BottomNavigationBar(
         onTap: onTabTapped, // new
         currentIndex: _currentIndex, // new
@@ -111,9 +91,6 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       _currentIndex = index;
     });
-    if(_currentIndex == 0){appBloc.updateTitle('Save notes');}
-    else if (_currentIndex == 1){appBloc.updateTitle('List users');}
-    else if (_currentIndex == 2){appBloc.updateTitle('A propos');}
   }
 }
 

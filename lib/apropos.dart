@@ -4,6 +4,9 @@ class aProposPage extends StatelessWidget {
 
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          title: Text("A Propos"),
+        ),
       body: Center(
           child: ListView(
             children: <Widget>[

@@ -39,6 +39,9 @@ class NoteState extends State<Note> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          title: Text("Notes"),
+        ),
         body: Container(
             padding: const EdgeInsets.all(30.0),
             child: ListView(

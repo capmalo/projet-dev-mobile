@@ -1,12 +1,14 @@
 import 'dart:convert';
-import '../app_properties_bloc.dart';
 import 'API.dart';
 import 'user.dart';
 import 'package:flutter/material.dart';
 import 'userDetails.dart';
 
+var appTitle = 'List Users';
+
 class Users extends StatelessWidget {
-  final appTitle = 'Users';
+  final appTitle = 'List Users';
+
   @override
   build(context) {
     return MaterialApp(
@@ -65,8 +67,10 @@ class _ListUsersScreenState extends State {
 
   @override
   Widget build(BuildContext context) {
-    appBloc.setContext(context);
     return Scaffold(
+      appBar: AppBar(
+        title: Text("List Users"),
+      ),
       body: new Container(
         child: new FutureBuilder(
           builder: (BuildContext context, AsyncSnapshot snapshot) {

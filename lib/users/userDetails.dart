@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../app_properties_bloc.dart';
 import 'user.dart';
 
 class Details extends StatelessWidget {
@@ -25,12 +24,13 @@ class Details extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double responsive = MediaQuery.of(context).size.height;
-    appBloc.updateTitle(user.fname + " " + user.lname);
-    appBloc.updateBack(true);
 
-    return WillPopScope(
-        onWillPop: () async{appBloc.updateBack(false);appBloc.updateTitle('List users');return true;},
-    child: Scaffold(
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(icon:Icon(Icons.arrow_back),
+            onPressed:(){Navigator.pop(context, false); }),
+        title: Text(user.fname + " " + user.lname),
+      ),
       body: new ListView(
         children: <Widget>[
           new Stack(
@@ -106,6 +106,6 @@ class Details extends StatelessWidget {
           )
         ],
       ),
-    ));
+    );
   }
 }
