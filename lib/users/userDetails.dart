@@ -29,7 +29,7 @@ class Details extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(icon:Icon(Icons.arrow_back),
             onPressed:(){Navigator.pop(context, false); }),
-        title: Text(user.fname + " " + user.lname),
+        title: Text(user.username),
       ),
       body: new ListView(
         children: <Widget>[
@@ -59,11 +59,13 @@ class Details extends StatelessWidget {
                         children: <Widget>[
                           Center(
                             child: new Text(
-                              user.fname + " " + user.lname,
+                              user.title + " " + user.fname + " " + user.lname,
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 40.0),
                             ),
                           ),
+                          _spacing(context),
+                          new Text("username : " + user.username),
                           _spacing(context),
                           new Text("email : " + user.email),
                           _spacing(context),

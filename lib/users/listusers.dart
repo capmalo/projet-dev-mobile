@@ -70,6 +70,11 @@ class _ListUsersScreenState extends State {
     return Scaffold(
       appBar: AppBar(
         title: Text("User list"),
+          actions: <Widget>[IconButton(icon: Icon(Icons.help), onPressed: () {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) => _buildAboutDialog(context),
+            );},),]
       ),
       body: new Container(
         child: new FutureBuilder(
@@ -84,9 +89,7 @@ class _ListUsersScreenState extends State {
                 itemBuilder: (BuildContext context, int index) {
                   return new ListTile(
                     title: new Text(
-                      users[index].fname +
-                          " " +
-                          users[index].lname,
+                      users[index].username,
                       style: new TextStyle(
                         fontWeight: FontWeight.bold,
                       ),
@@ -115,6 +118,26 @@ class _ListUsersScreenState extends State {
           _getUsers();
         },
       ),
+    );
+  }
+
+  Widget _buildAboutDialog(BuildContext context) {
+    return new AlertDialog(
+      title: const Text('About this list'),
+      content: new Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text('This list is provided by randomuser.me', style: const TextStyle(color: Colors.black87))
+        ],
+      ),
+      actions: <Widget>[
+        new FlatButton(
+          onPressed: () {Navigator.of(context).pop();},
+          textColor: Theme.of(context).primaryColor,
+          child: const Text('Okay, got it!'),
+        ),
+      ],
     );
   }
 }
