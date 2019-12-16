@@ -69,7 +69,7 @@ class _ListUsersScreenState extends State {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("List Users"),
+        title: Text("User list"),
       ),
       body: new Container(
         child: new FutureBuilder(
