@@ -30,6 +30,11 @@ class _ListUsersScreenState extends State {
   _getUsers() {
     API.getUsers().then((response) {
       setState(() {
+        var jsonData = json.decode(response.body);
+        for (var user in jsonData['results']) {
+          User data = new User(user['login']['uuid'], user['name']['first'], user['email']);
+          users.add(data);
+        }
         /*String list = json.decode(response.body);
         print(listS);
         Iterable list = json.decode(listS);
