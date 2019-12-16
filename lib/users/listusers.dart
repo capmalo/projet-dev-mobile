@@ -1,6 +1,5 @@
-import 'dart:collection';
 import 'dart:convert';
-
+import '../app_properties_bloc.dart';
 import 'API.dart';
 import 'user.dart';
 import 'package:flutter/material.dart';
@@ -66,14 +65,10 @@ class _ListUsersScreenState extends State {
 
   @override
   Widget build(BuildContext context) {
+    appBloc.setContext(context);
     return Scaffold(
-      /*appBar: AppBar(
-        title: Text("Users list"),
-        centerTitle: false,
-      ),*/
       body: new Container(
         child: new FutureBuilder(
-          //future: userDetails,
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (users.length == 0) {
               return new Center(
@@ -84,13 +79,6 @@ class _ListUsersScreenState extends State {
                 itemCount: users.length,
                 itemBuilder: (BuildContext context, int index) {
                   return new ListTile(
-                    /*leading: new Hero(
-                      /*tag: "image$index",
-                      child: CircleAvatar(
-                        backgroundImage:
-                        new NetworkImage(snapshot.data[index].pictureSmall),
-                      ),*/
-                    ),*/
                     title: new Text(
                       users[index].fname +
                           " " +
@@ -100,10 +88,6 @@ class _ListUsersScreenState extends State {
                       ),
                     ),
                     subtitle: new Text(users[index].email),
-                   /* trailing: new SizedBox(
-                      height: 20.0,
-                      child: new Image.asset(menOrWomen(snapshot.data[index].gender)),
-                    ),*/
                     onTap: () {
                       Navigator.push(
                         context,
@@ -120,13 +104,13 @@ class _ListUsersScreenState extends State {
           },
         ),
       ),
-     /* floatingActionButton: new FloatingActionButton(
+     floatingActionButton: new FloatingActionButton(
         tooltip: "Reload",
         child: new Icon(Icons.refresh),
         onPressed: () {
-          _reload();
+          _getUsers();
         },
-      ),*/
+      ),
     );
   }
 }

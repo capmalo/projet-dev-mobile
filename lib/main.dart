@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'placeholder.dart';
+import 'app_properties_bloc.dart';
 import 'apropos.dart';
 import 'note/note.dart';
 import 'users/listusers.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-var titleText;
 
 void main() => runApp(MyApp());
 
@@ -61,14 +59,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    if(_currentIndex == 0){
-      titleText = Text("Save note");}
-    else if(_currentIndex == 1){
-      titleText = Text("List Users");
-    }
-    else if (_currentIndex == 2){
-      titleText = Text("A Propos");
-    }
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -77,10 +67,23 @@ class _MyHomePageState extends State<MyHomePage> {
     // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        //title: Text("Projet de dev mobile"),
-        title: titleText,
+        automaticallyImplyLeading: true,
+        leading: StreamBuilder<Object>(
+            stream: appBloc.backStream,
+            initialData: false,
+            builder: (context, snapshot){
+              if(snapshot.data){return IconButton(icon:Icon(Icons.arrow_back),
+                  onPressed:(){appBloc.updateBack(false);appBloc.updateTitle('List users');Navigator.pop(appBloc.getContext()); });}
+              else{ return Text("");}
+            }
+        ),
+        title: StreamBuilder<Object>(
+            stream: appBloc.titleStream,
+            initialData: "Save Note",
+            builder: (context, snapshot) {
+              return Text(snapshot.data);
+            }
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         onTap: onTabTapped, // new
@@ -108,6 +111,9 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       _currentIndex = index;
     });
+    if(_currentIndex == 0){appBloc.updateTitle('Save notes');}
+    else if (_currentIndex == 1){appBloc.updateTitle('List users');}
+    else if (_currentIndex == 2){appBloc.updateTitle('A propos');}
   }
 }
 

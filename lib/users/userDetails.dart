@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import '../app_properties_bloc.dart';
 import 'user.dart';
 
 class Details extends StatelessWidget {
   final User user;
   final int index;
+  final appTitle = 'Ajout / modification d\'une note';
 
   Details(this.user, this.index);
   Widget _spacing(BuildContext context) {
@@ -23,12 +25,12 @@ class Details extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double responsive = MediaQuery.of(context).size.height;
+    appBloc.updateTitle(user.fname + " " + user.lname);
+    appBloc.updateBack(true);
 
-    return Scaffold(
-      appBar: new AppBar(
-        title: new Text(user.fname + " " + user.lname),
-        centerTitle: false,
-      ),
+    return WillPopScope(
+        onWillPop: () async{appBloc.updateBack(false);appBloc.updateTitle('List users');return true;},
+    child: Scaffold(
       body: new ListView(
         children: <Widget>[
           new Stack(
@@ -39,7 +41,7 @@ class Details extends StatelessWidget {
                 decoration: new BoxDecoration(
                     image: DecorationImage(
                   image:
-                      NetworkImage("https://iambharat.tk/images/hiretpp.jpg"),
+                      NetworkImage("https://upload.wikimedia.org/wikipedia/commons/e/e7/Logo-Efrei-Paris-2017.jpg"),
                   fit: BoxFit.cover,
                   alignment: Alignment.center,
                   repeat: ImageRepeat.noRepeat,
@@ -48,7 +50,7 @@ class Details extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                 child: Container(
-                  padding: new EdgeInsets.only(top: responsive * 0.15),
+                  padding: new EdgeInsets.only(top: responsive * 0.20),
                   child: new Card(
                     child: Container(
                       padding: new EdgeInsets.only(
@@ -63,78 +65,13 @@ class Details extends StatelessWidget {
                             ),
                           ),
                           _spacing(context),
-                          new Text(
-                            user.email,
-                            style: new TextStyle(color: Colors.grey),
-                          ),
+                          new Text("email : " + user.email),
                           _spacing(context),
-                          new Text(user.phonenum),
+                          new Text("Phone number : " + user.phonenum),
                           _spacing(context),
-                          new Text(
-                            user.age.toString(),
-                          ),
+                          new Text("Age : " + user.age.toString(),),
                           _spacing(context),
                           _spacing(context),
-                          new Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: <Widget>[
-                              InkWell(
-                                child: ClipRRect(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10)),
-                                  child: Image.asset(
-                                    "images/icons/facebook_logo.png",
-                                    width: 30.0,
-                                  ),
-                                ),
-                                onTap: () {},
-                              ),
-                              InkWell(
-                                child: ClipRRect(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10)),
-                                  child: Image.asset(
-                                    "images/icons/instagram_logo.png",
-                                    width: 30.0,
-                                  ),
-                                ),
-                                onTap: () {print("H");},
-                              ),
-                              InkWell(
-                                child: ClipRRect(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10)),
-                                  child: Image.asset(
-                                    "images/icons/website_logo.png",
-                                    width: 30.0,
-                                  ),
-                                ),
-                                onTap: () {},
-                              ),
-                              InkWell(
-                                child: ClipRRect(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10)),
-                                  child: Image.asset(
-                                    "images/icons/linkedin_logo.png",
-                                    width: 30.0,
-                                  ),
-                                ),
-                                onTap: () {},
-                              ),
-                              InkWell(
-                                child: ClipRRect(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10)),
-                                  child: Image.asset(
-                                    "images/icons/twitter_logo.png",
-                                    width: 30.0,
-                                  ),
-                                ),
-                                onTap: () {},
-                              ),
-                            ],
-                          )
                         ],
                       ),
                     ),
@@ -169,6 +106,6 @@ class Details extends StatelessWidget {
           )
         ],
       ),
-    );
+    ));
   }
 }
