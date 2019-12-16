@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'API.dart';
 import 'user.dart';
 import 'package:flutter/material.dart';
+import 'userDetails.dart';
 
 class Users extends StatelessWidget {
   final appTitle = 'Users';
@@ -72,7 +73,7 @@ class _ListUsersScreenState extends State {
       ),*/
       body: new Container(
         child: new FutureBuilder(
-          //future: userDetails(),
+          //future: userDetails,
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (users.length == 0) {
               return new Center(
@@ -103,15 +104,15 @@ class _ListUsersScreenState extends State {
                       height: 20.0,
                       child: new Image.asset(menOrWomen(snapshot.data[index].gender)),
                     ),*/
-                    /*onTap: () {
+                    onTap: () {
                       Navigator.push(
                         context,
                         new MaterialPageRoute(
                           builder: (context) =>
-                              Details(snapshot.data[index], index),
+                              Details(users[index], index),
                         ),
                       );
-                    },*/
+                    },
                   );
                 },
               );
