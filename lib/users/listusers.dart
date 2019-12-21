@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'userDetails.dart';
 
 var appTitle = 'List Users';
+bool initStatus = false;
 
 class Users extends StatelessWidget {
   final appTitle = 'List Users';
@@ -71,9 +72,7 @@ class _ListUsersScreenState extends State {
       appBar: AppBar(
         title: Text("User list"),
           actions: <Widget>[IconButton(icon: Icon(Icons.help), onPressed: () {
-            showDialog(
-              context: context,
-              builder: (BuildContext context) => _buildAboutDialog(context),
+            showDialog(context: context,builder: (BuildContext context) => _buildAboutDialog(context),
             );},),]
       ),
       body: new Container(

@@ -46,8 +46,8 @@ class aProposPage extends StatelessWidget {
                   TextSpan(
                     text: 'Les difficultées rencontrées :', style: TextStyle(fontWeight: FontWeight.bold),
                     children: <TextSpan>[
-                      TextSpan(text: '\n- Difficulté 1', style: TextStyle(fontWeight: FontWeight.normal)),
-                      TextSpan(text: '\n- Difficulté 2', style: TextStyle(fontWeight: FontWeight.normal)),
+                      TextSpan(text: '\n- Ecriture dans les préférences utilisateur', style: TextStyle(fontWeight: FontWeight.normal)),
+                      TextSpan(text: '\n- Utilisaton du json récupéré', style: TextStyle(fontWeight: FontWeight.normal)),
                     ],
                   ),
                 ),
